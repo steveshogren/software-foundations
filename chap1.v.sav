@@ -71,20 +71,107 @@ Infix "||" := orb.
 Example test_orb5: false || false || true = true.
 Proof. simpl. reflexivity. Qed.
 
-KCpISURFKikKRGVmaW5pdGlvbiBuYW5kYiAoYjE6Ym9vbCkgKGIyOmJvb2wpIDogYm9vbCA6PQog
-IG1hdGNoIGIxIHdpdGgKICB8IHRydWUgPT4gbmVnYiBiMgogIHwgZmFsc2UgPT4gdHJ1ZQogIGVu
-ZC4KCkV4YW1wbGUgdGVzdF9uYW5kYjE6IChuYW5kYiB0cnVlIGZhbHNlKSA9IHRydWUuClByb29m
-LiBzaW1wbC4gcmVmbGV4aXZpdHkuIFFlZC4KRXhhbXBsZSB0ZXN0X25hbmRiMjogKG5hbmRiIGZh
-bHNlIGZhbHNlKSA9IHRydWUuClByb29mLiBzaW1wbC4gcmVmbGV4aXZpdHkuIFFlZC4KRXhhbXBs
-ZSB0ZXN0X25hbmRiMzogKG5hbmRiIGZhbHNlIHRydWUpID0gdHJ1ZS4KUHJvb2YuIHNpbXBsLiBy
-ZWZsZXhpdml0eS4gUWVkLgpFeGFtcGxlIHRlc3RfbmFuZGI0OiAobmFuZGIgdHJ1ZSB0cnVlKSA9
-IGZhbHNlLgpQcm9vZi4gc2ltcGwuIHJlZmxleGl2aXR5LiBRZWQuCgoKRGVmaW5pdGlvbiBhbmRi
-MyAoYjE6Ym9vbCkgKGIyOmJvb2wpIChiMzpib29sKSA6IGJvb2wgOj0KIGIxICYmIGIyICYmIGIz
-LgoKRXhhbXBsZSB0ZXN0X2FuZGIzMTogKGFuZGIzIHRydWUgdHJ1ZSB0cnVlKSA9IHRydWUuClBy
-b29mLiBzaW1wbC4gcmVmbGV4aXZpdHkuIFFlZC4KRXhhbXBsZSB0ZXN0X2FuZGIzMjogKGFuZGIz
-IGZhbHNlIHRydWUgdHJ1ZSkgPSBmYWxzZS4KUHJvb2YuIHNpbXBsLiByZWZsZXhpdml0eS4gUWVk
-LgpFeGFtcGxlIHRlc3RfYW5kYjMzOiAoYW5kYjMgdHJ1ZSBmYWxzZSB0cnVlKSA9IGZhbHNlLgpQ
-cm9vZi4gc2ltcGwuIHJlZmxleGl2aXR5LiBRZWQuCkV4YW1wbGUgdGVzdF9hbmRiMzQ6IChhbmRi
-MyB0cnVlIHRydWUgZmFsc2UpID0gZmFsc2UuClByb29mLiBzaW1wbC4gcmVmbGV4aXZpdHkuIFFl
-ZC4KCigqVUhJREUqKQ==
+(*HIDE*)CkRlZmluaXRpb24gbmFuZGIgKGIxOmJvb2wpIChiMjpib29sKSA6IGJvb2wgOj0KICBtYXRjaCBi
+MSB3aXRoCiAgfCB0cnVlID0+IG5lZ2IgYjIKICB8IGZhbHNlID0+IHRydWUKICBlbmQuCgpFeGFt
+cGxlIHRlc3RfbmFuZGIxOiAobmFuZGIgdHJ1ZSBmYWxzZSkgPSB0cnVlLgpQcm9vZi4gc2ltcGwu
+IHJlZmxleGl2aXR5LiBRZWQuCkV4YW1wbGUgdGVzdF9uYW5kYjI6IChuYW5kYiBmYWxzZSBmYWxz
+ZSkgPSB0cnVlLgpQcm9vZi4gc2ltcGwuIHJlZmxleGl2aXR5LiBRZWQuCkV4YW1wbGUgdGVzdF9u
+YW5kYjM6IChuYW5kYiBmYWxzZSB0cnVlKSA9IHRydWUuClByb29mLiBzaW1wbC4gcmVmbGV4aXZp
+dHkuIFFlZC4KRXhhbXBsZSB0ZXN0X25hbmRiNDogKG5hbmRiIHRydWUgdHJ1ZSkgPSBmYWxzZS4K
+UHJvb2YuIHNpbXBsLiByZWZsZXhpdml0eS4gUWVkLgoKCkRlZmluaXRpb24gYW5kYjMgKGIxOmJv
+b2wpIChiMjpib29sKSAoYjM6Ym9vbCkgOiBib29sIDo9CiBiMSAmJiBiMiAmJiBiMy4KCkV4YW1w
+bGUgdGVzdF9hbmRiMzE6IChhbmRiMyB0cnVlIHRydWUgdHJ1ZSkgPSB0cnVlLgpQcm9vZi4gc2lt
+cGwuIHJlZmxleGl2aXR5LiBRZWQuCkV4YW1wbGUgdGVzdF9hbmRiMzI6IChhbmRiMyBmYWxzZSB0
+cnVlIHRydWUpID0gZmFsc2UuClByb29mLiBzaW1wbC4gcmVmbGV4aXZpdHkuIFFlZC4KRXhhbXBs
+ZSB0ZXN0X2FuZGIzMzogKGFuZGIzIHRydWUgZmFsc2UgdHJ1ZSkgPSBmYWxzZS4KUHJvb2YuIHNp
+bXBsLiByZWZsZXhpdml0eS4gUWVkLgpFeGFtcGxlIHRlc3RfYW5kYjM0OiAoYW5kYjMgdHJ1ZSB0
+cnVlIGZhbHNlKSA9IGZhbHNlLgpQcm9vZi4gc2ltcGwuIHJlZmxleGl2aXR5LiBRZWQuCgo=
+(*UHIDE*)
 
+Check true.
+(* ===> true : bool *)
+
+Check (negb true).
+(* ===> negb true : bool *)
+
+Check negb.
+(* ===> negb : bool -> bool *)
+
+Module Playground1.
+
+Inductive nat : Type :=
+  | O : nat
+  | S : nat -> nat.
+
+Definition pred (n : nat) : nat :=
+  match n with
+    | O => O
+    | S n' => n'
+  end.
+
+End Playground1.
+
+Definition minustwo (n : nat) : nat :=
+  match n with
+    | O => O
+    | S O => O
+    | S (S n') => n'
+  end.
+
+(* Somehow Coq is able to convert these recursive numbers ...
+   into numbers...?! Wat. *)
+Check (S (S (S (S O)))).
+  (* ===> 4 : nat *)
+Compute (minustwo 4).
+  (* ===> 2 : nat *)
+
+(* Fixpoint = recursive function *)
+Fixpoint evenb (n:nat) : bool :=
+  match n with
+  | O => true
+  | S O => false
+  | S (S n') => evenb n'
+  end.
+
+Definition oddb (n:nat) : bool := negb (evenb n).
+
+Example test_oddb1: oddb 1 = true.
+Proof. simpl. reflexivity. Qed.
+Example test_oddb2: oddb 4 = false.
+Proof. simpl. reflexivity. Qed.
+
+Module Playground2.
+
+Fixpoint plus (n : nat) (m : nat) : nat :=
+  match n with
+    | O => m
+    | S n' => S (plus n' m)
+  end.
+
+(*
+  addition via recursion
+  plus (S (S (S O))) (S (S O))
+==> S (plus (S (S O)) (S (S O)))
+      by the second clause of the match
+==> S (S (plus (S O) (S (S O))))
+      by the second clause of the match
+==> S (S (S (plus O (S (S O)))))
+      by the second clause of the match
+==> S (S (S (S (S O))))
+      by the first clause of the match
+This is blowing my mind...
+ *)
+Compute (plus 3 2).
+
+(* same syntax as two parens, still curriable *)
+Fixpoint mult (n m : nat) : nat :=
+  match n with
+    | O => O
+    | S n' => plus m (mult n' m)
+  end.
+
+Check mult.
+(* mult : nat -> nat -> nat *)
+
+Example test_mult1: (mult 3 3) = 9.
+Proof. simpl. reflexivity. Qed.
