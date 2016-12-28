@@ -175,3 +175,29 @@ Check mult.
 
 Example test_mult1: (mult 3 3) = 9.
 Proof. simpl. reflexivity. Qed.
+
+(* _ is wildcard, as expected  *)
+
+(* obviously, our nat can't go negative... how could we prove this though? *)
+Fixpoint minus (n m:nat) : nat :=
+  match n, m with
+  | O , _ => O
+  | S _ , O => n
+  | S n', S m' => minus n' m'
+  end.
+
+End Playground2.
+
+Fixpoint exp (base power : nat) : nat :=
+  match power with
+    | O => S O
+    | S p => mult base (exp base p)
+  end.
+
+
+(*HIDE*)CgpGaXhwb2ludCBmYWN0b3JpYWwgKG46bmF0KSA6IG5hdCAKICAoKiBSRVBMQUNFIFRISVMgTElO
+RSBXSVRIICAgOj0gX3lvdXJfZGVmaW5pdGlvbl8gLiAqKSAuIEFkbWl0dGVkLgoKRXhhbXBsZSB0
+ZXN0X2ZhY3RvcmlhbDE6IChmYWN0b3JpYWwgMykgPSA2LgooKiBGSUxMIElOIEhFUkUgKikgQWRt
+aXR0ZWQuCkV4YW1wbGUgdGVzdF9mYWN0b3JpYWwyOiAoZmFjdG9yaWFsIDUpID0gKG11bHQgMTAg
+MTIpLgooKiBGSUxMIElOIEhFUkUgKikgQWRtaXR0ZWQuCgo=
+(*UHIDE*)
