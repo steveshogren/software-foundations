@@ -190,14 +190,27 @@ End Playground2.
 
 Fixpoint exp (base power : nat) : nat :=
   match power with
-    | O => S O
-    | S p => mult base (exp base p)
+  | O => S O
+  | S p => mult base (exp base p)
   end.
 
+Definition minusone (n : nat) : nat :=
+  match n with
+    | O => O
+    | S O => O
+    | S n' => n'
+  end.
 
-(*HIDE*)CgpGaXhwb2ludCBmYWN0b3JpYWwgKG46bmF0KSA6IG5hdCAKICAoKiBSRVBMQUNFIFRISVMgTElO
-RSBXSVRIICAgOj0gX3lvdXJfZGVmaW5pdGlvbl8gLiAqKSAuIEFkbWl0dGVkLgoKRXhhbXBsZSB0
-ZXN0X2ZhY3RvcmlhbDE6IChmYWN0b3JpYWwgMykgPSA2LgooKiBGSUxMIElOIEhFUkUgKikgQWRt
-aXR0ZWQuCkV4YW1wbGUgdGVzdF9mYWN0b3JpYWwyOiAoZmFjdG9yaWFsIDUpID0gKG11bHQgMTAg
-MTIpLgooKiBGSUxMIElOIEhFUkUgKikgQWRtaXR0ZWQuCgo=
+Example test_minusone: (minusone 3) = 2.
+Proof. simpl. reflexivity. Qed.
+
+
+(*HIDE*)CgooKiBmYWN0b3JpYWwoMCkgID0gIDEKICAgZmFjdG9yaWFsKG4pICA9ICBuICogZmFjdG9yaWFs
+KG4tMSkgICAgIChpZiBuPjApICopCkZpeHBvaW50IGZhY3RvcmlhbCAobjpuYXQpIDogbmF0IDo9
+CiAgbWF0Y2ggbiB3aXRoCiAgfCBPID0+IFMgTwogIHwgbiA9PiBtdWx0IG4gKGZhY3RvcmlhbCAo
+bWludXMgbiAoUyBPKSkpCiAgZW5kLgoKICAKCkV4YW1wbGUgdGVzdF9mYWN0b3JpYWwxOiAoZmFj
+dG9yaWFsIDMpID0gNi4KUHJvb2YuIHNpbXBsLiByZWZsZXhpdml0eS4gUWVkLgpFeGFtcGxlIHRl
+c3RfZmFjdG9yaWFsMzogKGZhY3RvcmlhbCAwKSA9IDEuClByb29mLiBzaW1wbC4gcmVmbGV4aXZp
+dHkuIFFlZC4KRXhhbXBsZSB0ZXN0X2ZhY3RvcmlhbDI6IChmYWN0b3JpYWwgNSkgPSAobXVsdCAx
+MCAxMikuClByb29mLiBzaW1wbC4gcmVmbGV4aXZpdHkuIFFlZC4KCgo=
 (*UHIDE*)
