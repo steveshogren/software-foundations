@@ -207,12 +207,61 @@ Proof. simpl. reflexivity. Qed.
 (*HIDE*)CgooKiBmYWN0b3JpYWwoMCkgID0gIDEKICAgZmFjdG9yaWFsKG4pICA9ICBuICogZmFjdG9yaWFs
 KG4tMSkgICAgIChpZiBuPjApICopCkZpeHBvaW50IGZhY3RvcmlhbCAobjpuYXQpIDogbmF0IDo9
 CiAgbWF0Y2ggbiB3aXRoCiAgfCBPID0+IFMgTwogIHwgUyBuJyA9PiBtdWx0IG4gKGZhY3Rvcmlh
-bCBuJykKICBlbmQuCgooKgpkb2VzbnQgd29yayBmb3Igc29tZSByZWFzb24KRml4cG9pbnQgZmFj
-dG9yaWFsIChuOm5hdCkgOiBuYXQgOj0KICBtYXRjaCBuIHdpdGgKICB8IE8gPT4gUyBPCiAgfCBf
-ID0+IG11bHQgbiAoZmFjdG9yaWFsIChtaW51c29uZSBuKSkKICB8IFMgbicgPT4gbXVsdCBuIChm
-YWN0b3JpYWwgKG1pbnVzb25lIChTIG4nKSkpCiAgZW5kLgoKICopCgpFeGFtcGxlIHRlc3RfZmFj
-dG9yaWFsMTogKGZhY3RvcmlhbCAzKSA9IDYuClByb29mLiBzaW1wbC4gcmVmbGV4aXZpdHkuIFFl
-ZC4KRXhhbXBsZSB0ZXN0X2ZhY3RvcmlhbDM6IChmYWN0b3JpYWwgMCkgPSAxLgpQcm9vZi4gc2lt
-cGwuIHJlZmxleGl2aXR5LiBRZWQuCkV4YW1wbGUgdGVzdF9mYWN0b3JpYWwyOiAoZmFjdG9yaWFs
-IDUpID0gKG11bHQgMTAgMTIpLgpQcm9vZi4gc2ltcGwuIHJlZmxleGl2aXR5LiBRZWQuCgoK
+bCBuJykKICBlbmQuCgooKgpkb2VzbnQgd29yayBmb3Igc29tZSByZWFzb24uLi4KRml4cG9pbnQg
+ZmFjdG9yaWFsIChuOm5hdCkgOiBuYXQgOj0KICBtYXRjaCBuIHdpdGgKICB8IE8gPT4gUyBPCiAg
+fCBfID0+IG11bHQgbiAoZmFjdG9yaWFsIChtaW51c29uZSBuKSkKICB8IFMgbicgPT4gbXVsdCBu
+IChmYWN0b3JpYWwgKG1pbnVzb25lIChTIG4nKSkpCiAgZW5kLgoKICopCgpFeGFtcGxlIHRlc3Rf
+ZmFjdG9yaWFsMTogKGZhY3RvcmlhbCAzKSA9IDYuClByb29mLiBzaW1wbC4gcmVmbGV4aXZpdHku
+IFFlZC4KRXhhbXBsZSB0ZXN0X2ZhY3RvcmlhbDM6IChmYWN0b3JpYWwgMCkgPSAxLgpQcm9vZi4g
+c2ltcGwuIHJlZmxleGl2aXR5LiBRZWQuCkV4YW1wbGUgdGVzdF9mYWN0b3JpYWwyOiAoZmFjdG9y
+aWFsIDUpID0gKG11bHQgMTAgMTIpLgpQcm9vZi4gc2ltcGwuIHJlZmxleGl2aXR5LiBRZWQuCgo=
+(*UHIDE*)
+
+Notation "x + y" := (plus x y)
+                       (at level 50, left associativity)
+                       : nat_scope.
+Notation "x - y" := (minus x y)
+                       (at level 50, left associativity)
+                       : nat_scope.
+Notation "x * y" := (mult x y)
+                       (at level 40, left associativity)
+                       : nat_scope.
+
+Check ((0 + 1) + 1).
+
+Fixpoint beq_nat (n m : nat) : bool :=
+  match n with
+  | O => match m with
+        | O => true
+        | S m' => false
+         end
+  | S n' => match m with
+           | O => false
+           | S m' => beq_nat n' m'
+            end
+  end.
+
+Fixpoint leb (n m : nat) : bool :=
+  match n with
+  | O => true
+  | S n' =>
+      match m with
+      | O => false
+      | S m' => leb n' m'
+      end
+  end.
+
+Example test_leb1: (leb 2 2) = true.
+Proof. simpl. reflexivity. Qed.
+Example test_leb2: (leb 2 4) = true.
+Proof. simpl. reflexivity. Qed.
+Example test_leb3: (leb 4 2) = false.
+Proof. simpl. reflexivity. Qed.
+
+(*HIDE*)CkRlZmluaXRpb24gYmx0X25hdCAobiBtIDogbmF0KSA6IGJvb2wgCiAgKCogUkVQTEFDRSBUSElT
+IExJTkUgV0lUSCAgIDo9IF95b3VyX2RlZmluaXRpb25fIC4gKikgLiBBZG1pdHRlZC4KCkV4YW1w
+bGUgdGVzdF9ibHRfbmF0MTogKGJsdF9uYXQgMiAyKSA9IGZhbHNlLgooKiBGSUxMIElOIEhFUkUg
+KikgQWRtaXR0ZWQuCkV4YW1wbGUgdGVzdF9ibHRfbmF0MjogKGJsdF9uYXQgMiA0KSA9IHRydWUu
+CigqIEZJTEwgSU4gSEVSRSAqKSBBZG1pdHRlZC4KRXhhbXBsZSB0ZXN0X2JsdF9uYXQzOiAoYmx0
+X25hdCA0IDIpID0gZmFsc2UuCigqIEZJTEwgSU4gSEVSRSAqKSBBZG1pdHRlZC4K
 (*UHIDE*)
