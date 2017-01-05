@@ -263,5 +263,54 @@ RXhhbXBsZSB0ZXN0X2JsdF9uYXQxOiAoYmx0X25hdCAyIDIpID0gZmFsc2UuClByb29mLiBzaW1w
 bC4gcmVmbGV4aXZpdHkuIFFlZC4KRXhhbXBsZSB0ZXN0X2JsdF9uYXQyOiAoYmx0X25hdCAyIDQp
 ID0gdHJ1ZS4KUHJvb2YuIHNpbXBsLiByZWZsZXhpdml0eS4gUWVkLgpFeGFtcGxlIHRlc3RfYmx0
 X25hdDM6IChibHRfbmF0IDQgMikgPSBmYWxzZS4KUHJvb2YuIHNpbXBsLiByZWZsZXhpdml0eS4g
-UWVkLgoKQ29tcHV0ZSAoYmx0X25hdCAyIDMpLgo=
+UWVkLgoKQ29tcHV0ZSAoYmx0X25hdCA0IDMpLgoK
+(*UHIDE*)
+
+(* we can cause a proof of all natural numbers n with the forall *)
+ 
+Theorem plus_O_n : forall n : nat, 0 + n = n.
+Proof.
+  intros n. simpl. reflexivity.  Qed.
+
+(* simpl. is not needed, because reflexivity also simplifies  *)
+
+Theorem plus_O_n' : forall n : nat, 0 + n = n.
+Proof.
+  intros n. reflexivity. Qed.
+
+(* simpl. intros. reflexivity are all tactics used to guide the proof *)
+
+Theorem plus_1_l : forall n:nat, 1 + n = S n.
+Proof.
+  intros n. reflexivity.  Qed.
+
+Theorem mult_0_l : forall n:nat, 0 * n = 0.
+Proof.
+  intros n. simpl. reflexivity.  Qed.
+
+(* it looks like both simpl and reflexivity do not simplify terms on the right... *)
+
+Theorem plus_id_example : forall n m:nat,
+  n = m ->
+  n + n = m + m.
+Proof.
+  (* move both quantifiers into the context: *)
+  intros n m.  
+  (* move the hypothesis into the context: *)
+  intros H. 
+  (* rewrite the goal using the hypothesis: *)
+  rewrite -> H. 
+  reflexivity.  Qed.
+
+(*HIDE*)CgpUaGVvcmVtIHBsdXNfaWRfZXhlcmNpc2UgOiBmb3JhbGwgbiBtIG8gOiBuYXQsCiAgICBuID0g
+bSAtPgogICAgbSA9IG8gLT4KICAgIG4gKyBtID0gbSArIG8uClByb29mLgogICgqIG1vdmUgYm90
+aCBxdWFudGlmaWVycyBpbnRvIHRoZSBjb250ZXh0OiAqKQogIGludHJvcyBuIG0gby4gCiAgKCog
+bW92ZSBCT1RIIGh5cG90aGVzaXMgaW50byB0aGUgY29udGV4dDogKikKICBpbnRyb3MgSDEgSDIu
+IAogICAgICAgICgqIEgxIDogbiA9IG0gKikKICAgICAgICAoKiBIMiA6IG0gPSBvICopCiAgICAg
+ICAgKCogIG4gKyBtID0gbSArIG8gKikKICAoKiByZXdyaXRlIHRoZSBnb2FsIHVzaW5nIHRoZSBo
+eXBvdGhlc2lzOiAqKQogIHJld3JpdGUgLT4gSDEuICAKICAgICAgICAoKiBtICsgbSA9IG0gKyBv
+ICopCiAgcmV3cml0ZSAtPiBIMi4gIAogICAgICAgICgqIG8gKyBvID0gbyArIG8gKikKICByZWZs
+ZXhpdml0eS4gIFFlZC4KCigqIEFwcGFyZW50bHkgZWFjaCBoeXBvdGhlc2lzIG5lZWRzIGFuIGlu
+dHJvcywgYWxzbyB3ZSBjYW4gcmV3cml0ZSBlYWNoIGh5cG90aGVzaXMgYWNjb3JkaW5nbHkgICop
+Cg==
 (*UHIDE*)
