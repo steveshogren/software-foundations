@@ -1,3 +1,6 @@
+(*HIDE*)Cg==
+(*UHIDE*)
+
 Inductive day : Type :=
   | monday : day
   | tuesday : day
@@ -318,4 +321,109 @@ ZWQuCgooKiBBcHBhcmVudGx5IGVhY2ggaHlwb3RoZXNpcyBuZWVkcyBhbiBpbnRyb3MsIGFsc28g
 d2UgY2FuIHJld3JpdGUgZWFjaApoeXBvdGhlc2lzIGFjY29yZGluZ2x5LiBBbHNvLCBlYWNoIHJl
 d3JpdGUgY2FsbCB3aWxsIHVzZSB0aGUgYXJyb3cgdG8gZGVjaWRlIGhvdyB0byBsb2dpY2FsbHkK
 IHJlcGxhY2UgdGhlIHZhcmlhYmxlcyBpbnRyb2R1Y2VkIGluIHRoZSAiaW50cm9zIi4gKikK
+(*UHIDE*)
+
+(* here we use an existing proof to rewrite *)
+Theorem mult_0_plus : forall n m : nat,
+  (0 + n) * m = n * m.
+Proof.
+  intros n m. 
+  rewrite -> plus_O_n. 
+  reflexivity.  Qed.
+
+(*HIDE*)ClRoZW9yZW0gbXVsdF9TXzEgOiBmb3JhbGwgbiBtIDogbmF0LAogIG0gPSBTIG4gLT4KICBtICog
+KDEgKyBuKSA9IG0gKiBtLgpQcm9vZi4KICBpbnRyb3MgbiBtLiAKICBpbnRyb3MgSC4gCiAgcmV3
+cml0ZSAtPiBwbHVzXzFfbC4gCiAgcmV3cml0ZSA8LSBILiAKICByZWZsZXhpdml0eS4gIFFlZC4K
+(*UHIDE*)
+
+Theorem plus_1_neq_0 : forall n : nat,
+  beq_nat (n + 1) 0 = false.
+Proof.
+  (* destruct "unpacks" the two constructors for nat, and the two arguments  [EMPTY | n']
+     empty is used for O, and the second for S n'*)
+  intros n. destruct n as [| n']. 
+  (* first - is proof for subgoal of O *)
+  - reflexivity. 
+  (* second - is proof for subgoal of S n' *)
+  - reflexivity. Qed.
+
+Theorem negb_involutive : forall b : bool,
+  negb (negb b) = b.
+Proof.
+  (* no "as" here because both constructors for bool have no arguments *)
+  intros b. destruct b. 
+  - reflexivity. 
+  - reflexivity.  Qed.
+
+
+Theorem andb_commutative : forall b c, andb b c = andb c b.
+Proof.
+  intros b c. destruct b. (* split b into both cases *)
+  (* true && c = c && true *)
+  - destruct c. (* split c into both cases *)
+    + reflexivity. (* true && false = false && true *)
+    + reflexivity. (* true && true = true && true *)
+  (* false && c = c && false *)
+  - destruct c. (* split c into both cases *)
+    + reflexivity. (* false && false = false && false *)
+    + reflexivity. (* false && true = true && false *)
+Qed.
+
+(* we can also use {} for grouping... *)
+Theorem andb_commutative' : forall b c, andb b c = andb c b.
+Proof.
+  intros b c. destruct b.
+  { destruct c.
+    { reflexivity. }
+    { reflexivity. } }
+  { destruct c.
+    { reflexivity. }
+    { reflexivity. } }
+Qed.
+
+(* reusing - for the bullet when using {} *)
+Theorem andb3_exchange :
+  forall b c d, andb (andb b c) d = andb (andb b d) c.
+Proof.
+  intros b c d. destruct b.
+  - destruct c.
+    { destruct d.
+      - reflexivity.
+      - reflexivity. }
+    { destruct d.
+      - reflexivity.
+      - reflexivity. }
+  - destruct c.
+    { destruct d.
+      - reflexivity.
+      - reflexivity. }
+    { destruct d.
+      - reflexivity.
+      - reflexivity. }
+Qed.
+
+(* intros [|n]  === intros n. destruct n as [|n]. *)
+Theorem plus_1_neq_0' : forall n : nat,
+  beq_nat (n + 1) 0 = false.
+Proof.
+  intros [|n]. 
+  - reflexivity.
+  - reflexivity.  Qed.
+
+(* no arguments can be written as just [] *)
+Theorem andb_commutative'' :
+  forall b c, andb b c = andb c b.
+Proof.
+  intros [] []. 
+  - reflexivity.
+  - reflexivity.
+  - reflexivity.
+  - reflexivity.
+Qed.
+
+(*HIDE*)CgpUaGVvcmVtIGFuZGJfdHJ1ZV9lbGltMiA6IGZvcmFsbCBiIGMgOiBib29sLAogIGFuZGIgYiBj
+ID0gdHJ1ZSAtPiBjID0gdHJ1ZS4KUHJvb2YuCiAgaW50cm9zIGIgYyBILgogIGRlc3RydWN0IGMu
+CiAgLSByZWZsZXhpdml0eS4KICAtIHtyZXdyaXRlIDwtIEguCiAgICAgZGVzdHJ1Y3QgYi4KICAg
+ICAtIHJlZmxleGl2aXR5LgogICAgIC0gcmVmbGV4aXZpdHkuIH0KUWVkLgooKiBBUFBBUkVOVExZ
+IC59IGlzIGRpZmZlcmVudCBmcm9tIC4gfSBORVZFUiBGT1JHRVQgKikKCg==
 (*UHIDE*)
