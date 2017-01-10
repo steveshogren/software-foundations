@@ -1,6 +1,10 @@
 (*HIDE*)Cg==
 (*UHIDE*)
 
+(* C-cC-n  next line *)
+(* C-cC-u  previous line *)
+(* C-cC-ENTER run to line *)
+
 Inductive day : Type :=
   | monday : day
   | tuesday : day
@@ -429,5 +433,7 @@ ID0gZmFsc2UgfCBmYWxzZSA9IHRydWUgKikKICAtIHtyZXdyaXRlIDwtIEguCiAgICAoKiBmYWxz
 ZSA9IGIgJiYgZmFsc2UgKikKICAgICBkZXN0cnVjdCBiLgogICAgIC0gcmVmbGV4aXZpdHkuICgq
 IGZhbHNlID0gdHJ1ZSAmJiBmYWxzZSAqKQogICAgIC0gcmVmbGV4aXZpdHkuICgqIGZhbHNlID0g
 dHJ1ZSAmJiBmYWxzZSAqKSB9ClFlZC4KKCogQVBQQVJFTlRMWSAufSBpcyBkaWZmZXJlbnQgZnJv
-bSAuIH0gTkVWRVIgRk9SR0VUICopCgo=
+bSAuIH0gTkVWRVIgRk9SR0VUICopCgoKVGhlb3JlbSB6ZXJvX25iZXFfcGx1c18xIDogZm9yYWxs
+IG4gOiBuYXQsCiAgYmVxX25hdCAwIChuICsgMSkgPSBmYWxzZS4KUHJvb2YuCiAgaW50cm9zIFtd
+LiAKICAtIHJlZmxleGl2aXR5LgogIC0gcmVmbGV4aXZpdHkuICBRZWQuCgo=
 (*UHIDE*)
