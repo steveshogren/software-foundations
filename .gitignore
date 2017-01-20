@@ -1,2 +1,14 @@
-book*
-/chap1.v
+*.glob
+*.vo
+*.v
+*.html
+*.js
+*.ml
+*.mli
+*.gif
+/book/LICENSE
+/book/Makefile
+/book/README
+/book/coqdoc.css
+/book/deps.map
+/book/index-bg.jpg
