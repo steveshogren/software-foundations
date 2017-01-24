@@ -1,3 +1,6 @@
+1(*HIDE*)Cg==
+(*UHIDE*)
+
 (** * Induction: Proof by Induction *)
 
 (** First, we import all of our definitions from the previous

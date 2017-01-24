@@ -1,2 +1,2 @@
 use MIME::Base64;
-print s/(\(\*HIDE\*\))(.*?)(\(\*UHIDE\*\))/'(*HIDE*)'.encode_base64($2).'(*UHIDE*)'/eigs
+s/(\(\*HIDE\*\))(.*?)(\(\*UHIDE\*\))/$1.encode_base64($2).$3/eigs
