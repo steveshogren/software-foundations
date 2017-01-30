@@ -42,7 +42,7 @@ Theorem plus_n_O_firsttry : forall n:nat,
 
 Proof.
   intros n.
-  simpl. (* Does nothing! *)
+  simpl. 
 Abort.
 
 (** And reasoning by cases using [destruct n] doesn't get us much
@@ -119,63 +119,33 @@ Proof.
 (** Prove the following using induction. You might need previously
     proven results. *)
 
-Theorem mult_0_r : forall n:nat,
-  n * 0 = 0.
-Proof.
-  (* FILL IN HERE *) Admitted.
-
-Theorem plus_n_Sm : forall n m : nat, 
-  S (n + m) = n + (S m).
-Proof.
-  (* FILL IN HERE *) Admitted.
-
-Theorem plus_comm : forall n m : nat,
-  n + m = m + n.
-Proof.
-  (* FILL IN HERE *) Admitted.
-
-Theorem plus_assoc : forall n m p : nat,
-  n + (m + p) = (n + m) + p.
-Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
-
-(** **** Exercise: 2 stars (double_plus)  *)
-(** Consider the following function, which doubles its argument: *)
-
-Fixpoint double (n:nat) :=
-  match n with
-  | O => O
-  | S n' => S (S (double n'))
-  end.
-
-(** Use induction to prove this simple fact about [double]: *)
-
-Lemma double_plus : forall n, double n = n + n .
-Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
-
-(** **** Exercise: 2 stars, optional (evenb_S)  *)
-(** One inconveninent aspect of our definition of [evenb n] is that it
-    may need to perform a recursive call on [n - 2]. This makes proofs
-    about [evenb n] harder when done by induction on [n], since we may
-    need an induction hypothesis about [n - 2]. The following lemma
-    gives a better characterization of [evenb (S n)]: *)
-
-Theorem evenb_S : forall n : nat,
-  evenb (S n) = negb (evenb n).
-Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
-
-(** **** Exercise: 1 star (destruct_induction)  *)
-(** Briefly explain the difference between the tactics [destruct] 
-    and [induction].
-
-(* FILL IN HERE *)
-*)
-(** [] *)
+(*HIDE*)CgpUaGVvcmVtIG11bHRfMF9yIDogZm9yYWxsIG46bmF0LAogIG4gKiAwID0gMC4KUHJvb2YuCiAg
+KCogRklMTCBJTiBIRVJFICopIEFkbWl0dGVkLgoKVGhlb3JlbSBwbHVzX25fU20gOiBmb3JhbGwg
+biBtIDogbmF0LCAKICBTIChuICsgbSkgPSBuICsgKFMgbSkuClByb29mLgogICgqIEZJTEwgSU4g
+SEVSRSAqKSBBZG1pdHRlZC4KClRoZW9yZW0gcGx1c19jb21tIDogZm9yYWxsIG4gbSA6IG5hdCwK
+ICBuICsgbSA9IG0gKyBuLgpQcm9vZi4KICAoKiBGSUxMIElOIEhFUkUgKikgQWRtaXR0ZWQuCgpU
+aGVvcmVtIHBsdXNfYXNzb2MgOiBmb3JhbGwgbiBtIHAgOiBuYXQsCiAgbiArIChtICsgcCkgPSAo
+biArIG0pICsgcC4KUHJvb2YuCiAgKCogRklMTCBJTiBIRVJFICopIEFkbWl0dGVkLgooKiogW10g
+KikKCgooKiogKioqKiBFeGVyY2lzZTogMiBzdGFycyAoZG91YmxlX3BsdXMpICAqKQooKiogQ29u
+c2lkZXIgdGhlIGZvbGxvd2luZyBmdW5jdGlvbiwgd2hpY2ggZG91YmxlcyBpdHMgYXJndW1lbnQ6
+ICopCgpGaXhwb2ludCBkb3VibGUgKG46bmF0KSA6PQogIG1hdGNoIG4gd2l0aAogIHwgTyA9PiBP
+CiAgfCBTIG4nID0+IFMgKFMgKGRvdWJsZSBuJykpCiAgZW5kLgoKKCoqIFVzZSBpbmR1Y3Rpb24g
+dG8gcHJvdmUgdGhpcyBzaW1wbGUgZmFjdCBhYm91dCBbZG91YmxlXTogKikKCkxlbW1hIGRvdWJs
+ZV9wbHVzIDogZm9yYWxsIG4sIGRvdWJsZSBuID0gbiArIG4gLgpQcm9vZi4KICAoKiBGSUxMIElO
+IEhFUkUgKikgQWRtaXR0ZWQuCigqKiBbXSAqKQoKKCoqICoqKiogRXhlcmNpc2U6IDIgc3RhcnMs
+IG9wdGlvbmFsIChldmVuYl9TKSAgKikKKCoqIE9uZSBpbmNvbnZlbmluZW50IGFzcGVjdCBvZiBv
+dXIgZGVmaW5pdGlvbiBvZiBbZXZlbmIgbl0gaXMgdGhhdCBpdAogICAgbWF5IG5lZWQgdG8gcGVy
+Zm9ybSBhIHJlY3Vyc2l2ZSBjYWxsIG9uIFtuIC0gMl0uIFRoaXMgbWFrZXMgcHJvb2ZzCiAgICBh
+Ym91dCBbZXZlbmIgbl0gaGFyZGVyIHdoZW4gZG9uZSBieSBpbmR1Y3Rpb24gb24gW25dLCBzaW5j
+ZSB3ZSBtYXkKICAgIG5lZWQgYW4gaW5kdWN0aW9uIGh5cG90aGVzaXMgYWJvdXQgW24gLSAyXS4g
+VGhlIGZvbGxvd2luZyBsZW1tYQogICAgZ2l2ZXMgYSBiZXR0ZXIgY2hhcmFjdGVyaXphdGlvbiBv
+ZiBbZXZlbmIgKFMgbildOiAqKQoKVGhlb3JlbSBldmVuYl9TIDogZm9yYWxsIG4gOiBuYXQsCiAg
+ZXZlbmIgKFMgbikgPSBuZWdiIChldmVuYiBuKS4KUHJvb2YuCiAgKCogRklMTCBJTiBIRVJFICop
+IEFkbWl0dGVkLgooKiogW10gKikKCigqKiAqKioqIEV4ZXJjaXNlOiAxIHN0YXIgKGRlc3RydWN0
+X2luZHVjdGlvbikgICopCigqKiBCcmllZmx5IGV4cGxhaW4gdGhlIGRpZmZlcmVuY2UgYmV0d2Vl
+biB0aGUgdGFjdGljcyBbZGVzdHJ1Y3RdIAogICAgYW5kIFtpbmR1Y3Rpb25dLgoKKCogRklMTCBJ
+TiBIRVJFICopCiopCigqKiBbXSAqKQoK
+(*UHIDE*)
 
 (* ################################################################# *)
 (** * Proofs Within Proofs *)
