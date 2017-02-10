@@ -100,6 +100,20 @@ Proof.
     case becomes [(S n') + 0 = S n'], which simplifies to [S (n' + 0)
     = S n'], which in turn follows from [IHn']. *)
 
+(* We cannot use destruct here, because it is not forall n, just for that
+specific n. After the O case, we are left with the n case, which is exactly what
+we are trying to prove! *)
+Theorem plus_n_Od : forall n:nat, n = n + 0.
+Proof.
+  intros n. destruct n.
+  - (* n = 0 *)    reflexivity.
+  - (* S n = S (n + 0) *) simpl. Admitted.
+
+(* So induction differs in that it works forall n, not just n. It also creates a
+hypothesis we can use for our matching. I am still very confused on the concept
+of how using the thing we are proving to prove our Theorem makes any sense at
+all... :/ *)
+
 Theorem minus_diag : forall n,
   minus n n = 0.
 Proof.
@@ -118,6 +132,10 @@ Proof.
 (** **** Exercise: 2 stars, recommended (basic_induction)  *)
 (** Prove the following using induction. You might need previously
     proven results. *)
+(* Its becoming more and more apparent that proofs must be built up out of
+smaller proofs. A good first step would be to consider what proofs I have
+already proven. This book seems to link exercises and examples together: the
+solution for a proof is highly likely to be found in the prior proofs. *)
 
 (*HIDE*)CgpUaGVvcmVtIG11bHRfMF9yIDogZm9yYWxsIG46bmF0LAogIG4gKiAwID0gMC4KUHJvb2YuCiAg
 aW50cm9zIG4uIGluZHVjdGlvbiBuIGFzIFt8IG4nIElIbiddLgogICAgc2ltcGwuIHJlZmxleGl2
