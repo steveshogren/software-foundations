@@ -257,303 +257,205 @@ Proof.
   rewrite -> H. reflexivity.  Qed.
 
 (* ################################################################# *)
-(** * More Exercises *)
-
-(** **** Exercise: 3 stars, recommended (mult_comm)  *)
-(** Use [assert] to help prove this theorem.  You shouldn't need to
-    use induction on [plus_swap]. *)
-
-Theorem plus_swap : forall n m p : nat,
-  n + (m + p) = m + (n + p).
-Proof.
-  (* FILL IN HERE *) Admitted.
-
-(** Now prove commutativity of multiplication.  (You will probably
-    need to define and prove a separate subsidiary theorem to be used
-    in the proof of this one.  You may find that [plus_swap] comes in
-    handy.) *)
-
-Theorem mult_comm : forall m n : nat,
-  m * n = n * m.
-Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
-
-(** **** Exercise: 3 stars, optional (more_exercises)  *)
-(** Take a piece of paper.  For each of the following theorems, first
-    _think_ about whether (a) it can be proved using only
-    simplification and rewriting, (b) it also requires case
-    analysis ([destruct]), or (c) it also requires induction.  Write
-    down your prediction.  Then fill in the proof.  (There is no need
-    to turn in your piece of paper; this is just to encourage you to
-    reflect before you hack!) *)
-
-Theorem leb_refl : forall n:nat,
-  true = leb n n.
-Proof.
-  (* FILL IN HERE *) Admitted.
-
-Theorem zero_nbeq_S : forall n:nat,
-  beq_nat 0 (S n) = false.
-Proof.
-  (* FILL IN HERE *) Admitted.
-
-Theorem andb_false_r : forall b : bool,
-  andb b false = false.
-Proof.
-  (* FILL IN HERE *) Admitted.
-
-Theorem plus_ble_compat_l : forall n m p : nat,
-  leb n m = true -> leb (p + n) (p + m) = true.
-Proof.
-  (* FILL IN HERE *) Admitted.
-
-Theorem S_nbeq_0 : forall n:nat,
-  beq_nat (S n) 0 = false.
-Proof.
-  (* FILL IN HERE *) Admitted.
-
-Theorem mult_1_l : forall n:nat, 1 * n = n.
-Proof.
-  (* FILL IN HERE *) Admitted.
-
-Theorem all3_spec : forall b c : bool,
-    orb
-      (andb b c)
-      (orb (negb b)
-               (negb c))
-  = true.
-Proof.
-  (* FILL IN HERE *) Admitted.
-
-Theorem mult_plus_distr_r : forall n m p : nat,
-  (n + m) * p = (n * p) + (m * p).
-Proof.
-  (* FILL IN HERE *) Admitted.
-
-Theorem mult_assoc : forall n m p : nat,
-  n * (m * p) = (n * m) * p.
-Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
-
-(** **** Exercise: 2 stars, optional (beq_nat_refl)  *)
-(** Prove the following theorem.  (Putting the [true] on the left-hand
-    side of the equality may look odd, but this is how the theorem is
-    stated in the Coq standard library, so we follow suit.  Rewriting
-    works equally well in either direction, so we will have no problem
-    using the theorem no matter which way we state it.) *)
-
-Theorem beq_nat_refl : forall n : nat,
-  true = beq_nat n n.
-Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
-
-(** **** Exercise: 2 stars, optional (plus_swap')  *)
-(** The [replace] tactic allows you to specify a particular subterm to
-   rewrite and what you want it rewritten to: [replace (t) with (u)]
-   replaces (all copies of) expression [t] in the goal by expression
-   [u], and generates [t = u] as an additional subgoal. This is often
-   useful when a plain [rewrite] acts on the wrong part of the goal.
-
-   Use the [replace] tactic to do a proof of [plus_swap'], just like
-   [plus_swap] but without needing [assert (n + m = m + n)]. *)
-
-Theorem plus_swap' : forall n m p : nat,
-  n + (m + p) = m + (n + p).
-Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
-
-(** **** Exercise: 3 stars, recommended (binary_commute)  *)
-(** Recall the [incr] and [bin_to_nat] functions that you
-    wrote for the [binary] exercise in the [Basics] chapter.  Prove
-    that the following diagram commutes:
-
-               bin --------- incr -------> bin
-                |                           |
-            bin_to_nat                  bin_to_nat
-                |                           |
-                v                           v
-               nat ---------- S ---------> nat
-
-    That is, incrementing a binary number and then converting it to 
-    a (unary) natural number yields the same result as first converting
-    it to a natural number and then incrementing.  
-    Name your theorem [bin_to_nat_pres_incr] ("pres" for "preserves").
-
-    Before you start working on this exercise, please copy the
-    definitions from your solution to the [binary] exercise here so
-    that this file can be graded on its own.  If you find yourself
-    wanting to change your original definitions to make the property
-    easier to prove, feel free to do so! *)
-
-(* FILL IN HERE *)
-(** [] *)
-
-(** **** Exercise: 5 stars, advanced (binary_inverse)  *)
-(** This exercise is a continuation of the previous exercise about
-    binary numbers.  You will need your definitions and theorems from
-    there to complete this one.
-
-    (a) First, write a function to convert natural numbers to binary
-        numbers.  Then prove that starting with any natural number,
-        converting to binary, then converting back yields the same
-        natural number you started with.
-
-    (b) You might naturally think that we should also prove the
-        opposite direction: that starting with a binary number,
-        converting to a natural, and then back to binary yields the
-        same number we started with.  However, this is not true!
-        Explain what the problem is.
-
-    (c) Define a "direct" normalization function -- i.e., a function
-        [normalize] from binary numbers to binary numbers such that,
-        for any binary number b, converting to a natural and then back
-        to binary yields [(normalize b)].  Prove it.  (Warning: This
-        part is tricky!)
-
-    Again, feel free to change your earlier definitions if this helps
-    here. *)
-
-(* FILL IN HERE *)
-(** [] *)
-
-(* ################################################################# *)
-(** * Formal vs. Informal Proof (Optional) *)
-
-(** "_Informal proofs are algorithms; formal proofs are code_." *)
-
-(** The question of what constitutes a proof of a mathematical
-    claim has challenged philosophers for millennia, but a rough and
-    ready definition could be this: A proof of a mathematical
-    proposition [P] is a written (or spoken) text that instills in the
-    reader or hearer the certainty that [P] is true.  That is, a proof
-    is an act of communication.
-
-    Acts of communication may involve different sorts of readers.  On
-    one hand, the "reader" can be a program like Coq, in which case
-    the "belief" that is instilled is that [P] can be mechanically
-    derived from a certain set of formal logical rules, and the proof
-    is a recipe that guides the program in checking this fact.  Such
-    recipes are _formal_ proofs.
-
-    Alternatively, the reader can be a human being, in which case the
-    proof will be written in English or some other natural language,
-    and will thus necessarily be _informal_.  Here, the criteria for
-    success are less clearly specified.  A "valid" proof is one that
-    makes the reader believe [P].  But the same proof may be read by
-    many different readers, some of whom may be convinced by a
-    particular way of phrasing the argument, while others may not be.
-    Some readers may be particularly pedantic, inexperienced, or just
-    plain thick-headed; the only way to convince them will be to make
-    the argument in painstaking detail.  But other readers, more
-    familiar in the area, may find all this detail so overwhelming
-    that they lose the overall thread; all they want is to be told the
-    main ideas, since it is easier for them to fill in the details for
-    themselves than to wade through a written presentation of them.
-    Ultimately, there is no universal standard, because there is no
-    single way of writing an informal proof that is guaranteed to
-    convince every conceivable reader.
-
-    In practice, however, mathematicians have developed a rich set of
-    conventions and idioms for writing about complex mathematical
-    objects that -- at least within a certain community -- make
-    communication fairly reliable.  The conventions of this stylized
-    form of communication give a fairly clear standard for judging
-    proofs good or bad.
-
-    Because we are using Coq in this course, we will be working
-    heavily with formal proofs.  But this doesn't mean we can
-    completely forget about informal ones!  Formal proofs are useful
-    in many ways, but they are _not_ very efficient ways of
-    communicating ideas between human beings. *)
-
-(** For example, here is a proof that addition is associative: *)
-
-Theorem plus_assoc' : forall n m p : nat,
-  n + (m + p) = (n + m) + p.
-Proof. intros n m p. induction n as [| n' IHn']. reflexivity.
-  simpl. rewrite -> IHn'. reflexivity.  Qed.
-
-(** Coq is perfectly happy with this.  For a human, however, it
-    is difficult to make much sense of it.  We can use comments and
-    bullets to show the structure a little more clearly... *)
-
-Theorem plus_assoc'' : forall n m p : nat,
-  n + (m + p) = (n + m) + p.
-Proof.
-  intros n m p. induction n as [| n' IHn'].
-  - (* n = 0 *)
-    reflexivity.
-  - (* n = S n' *)
-    simpl. rewrite -> IHn'. reflexivity.   Qed.
-
-(** ... and if you're used to Coq you may be able to step
-    through the tactics one after the other in your mind and imagine
-    the state of the context and goal stack at each point, but if the
-    proof were even a little bit more complicated this would be next
-    to impossible.
-
-    A (pedantic) mathematician might write the proof something like
-    this: *)
-
-(** - _Theorem_: For any [n], [m] and [p],
-
-      n + (m + p) = (n + m) + p.
-
-    _Proof_: By induction on [n].
-
-    - First, suppose [n = 0].  We must show
-
-        0 + (m + p) = (0 + m) + p.
-
-      This follows directly from the definition of [+].
-
-    - Next, suppose [n = S n'], where
-
-        n' + (m + p) = (n' + m) + p.
-
-      We must show
-
-        (S n') + (m + p) = ((S n') + m) + p.
-
-      By the definition of [+], this follows from
-
-        S (n' + (m + p)) = S ((n' + m) + p),
-
-      which is immediate from the induction hypothesis.  _Qed_. *)
-
-
-(** The overall form of the proof is basically similar, and of
-    course this is no accident: Coq has been designed so that its
-    [induction] tactic generates the same sub-goals, in the same
-    order, as the bullet points that a mathematician would write.  But
-    there are significant differences of detail: the formal proof is
-    much more explicit in some ways (e.g., the use of [reflexivity])
-    but much less explicit in others (in particular, the "proof state"
-    at any given point in the Coq proof is completely implicit,
-    whereas the informal proof reminds the reader several times where
-    things stand). *)
-
-(** **** Exercise: 2 stars, advanced, recommended (plus_comm_informal)  *)
-(** Translate your solution for [plus_comm] into an informal proof:
-
-    Theorem: Addition is commutative.
-
-    Proof: (* FILL IN HERE *)
-*)
-(** [] *)
-
-(** **** Exercise: 2 stars, optional (beq_nat_refl_informal)  *)
-(** Write an informal proof of the following theorem, using the
-    informal proof of [plus_assoc] as a model.  Don't just
-    paraphrase the Coq tactics into English!
-
-    Theorem: [true = beq_nat n n] for any [n].
-
-    Proof: (* FILL IN HERE *)
-[] *)
-
-(** $Date: 2016-05-26 16:17:19 -0400 (Thu, 26 May 2016) $ *)
+(*HIDE*)CigqKiAqIE1vcmUgRXhlcmNpc2VzICopCgooKiogKioqKiBFeGVyY2lzZTogMyBzdGFycywgcmVj
+b21tZW5kZWQgKG11bHRfY29tbSkgICopCigqKiBVc2UgW2Fzc2VydF0gdG8gaGVscCBwcm92ZSB0
+aGlzIHRoZW9yZW0uICBZb3Ugc2hvdWxkbid0IG5lZWQgdG8KICAgIHVzZSBpbmR1Y3Rpb24gb24g
+W3BsdXNfc3dhcF0uICopCgooKiBUaGVvcmVtIHBsdXNfYXNzb2MgOiBmb3JhbGwgbiBtIHAgOiBu
+YXQsICopCigqICAgbiArIChtICsgcCkgPSAobiArIG0pICsgcC4gKikKCigqIFRoZW9yZW0gcGx1
+c19jb21tIDogZm9yYWxsIG4gbSA6IG5hdCwgKikKKCogICBuICsgbSA9IG0gKyBuLiAqKQoKVGhl
+b3JlbSBwbHVzX3N3YXAgOiBmb3JhbGwgbiBtIHAgOiBuYXQsCiAgbiArIChtICsgcCkgPSBtICsg
+KG4gKyBwKS4KUHJvb2YuCiAgaW50cm9zIG4gbSBwLgogIHJld3JpdGUgLT4gcGx1c19jb21tLgog
+IHJld3JpdGUgPC0gcGx1c19hc3NvYy4KICBhc3NlcnQgKEg6IHAgKyBuID0gbiArIHApLgogIHsg
+cmV3cml0ZSAtPiBwbHVzX2NvbW0uIHJlZmxleGl2aXR5LiB9CiAgcmV3cml0ZSAtPiBILiAgCiAg
+cmVmbGV4aXZpdHkuClFlZC4KCigqKiBOb3cgcHJvdmUgY29tbXV0YXRpdml0eSBvZiBtdWx0aXBs
+aWNhdGlvbi4gIChZb3Ugd2lsbCBwcm9iYWJseQogICAgbmVlZCB0byBkZWZpbmUgYW5kIHByb3Zl
+IGEgc2VwYXJhdGUgc3Vic2lkaWFyeSB0aGVvcmVtIHRvIGJlIHVzZWQKICAgIGluIHRoZSBwcm9v
+ZiBvZiB0aGlzIG9uZS4gIFlvdSBtYXkgZmluZCB0aGF0IFtwbHVzX3N3YXBdIGNvbWVzIGluCiAg
+ICBoYW5keS4pICopCgpUaGVvcmVtIG11bHRfY29tbSA6IGZvcmFsbCBtIG4gOiBuYXQsCiAgbSAq
+IG4gPSBuICogbS4KUHJvb2YuCiAgKCogRklMTCBJTiBIRVJFICopIEFkbWl0dGVkLgooKiogW10g
+KikKCigqKiAqKioqIEV4ZXJjaXNlOiAzIHN0YXJzLCBvcHRpb25hbCAobW9yZV9leGVyY2lzZXMp
+ICAqKQooKiogVGFrZSBhIHBpZWNlIG9mIHBhcGVyLiAgRm9yIGVhY2ggb2YgdGhlIGZvbGxvd2lu
+ZyB0aGVvcmVtcywgZmlyc3QKICAgIF90aGlua18gYWJvdXQgd2hldGhlciAoYSkgaXQgY2FuIGJl
+IHByb3ZlZCB1c2luZyBvbmx5CiAgICBzaW1wbGlmaWNhdGlvbiBhbmQgcmV3cml0aW5nLCAoYikg
+aXQgYWxzbyByZXF1aXJlcyBjYXNlCiAgICBhbmFseXNpcyAoW2Rlc3RydWN0XSksIG9yIChjKSBp
+dCBhbHNvIHJlcXVpcmVzIGluZHVjdGlvbi4gIFdyaXRlCiAgICBkb3duIHlvdXIgcHJlZGljdGlv
+bi4gIFRoZW4gZmlsbCBpbiB0aGUgcHJvb2YuICAoVGhlcmUgaXMgbm8gbmVlZAogICAgdG8gdHVy
+biBpbiB5b3VyIHBpZWNlIG9mIHBhcGVyOyB0aGlzIGlzIGp1c3QgdG8gZW5jb3VyYWdlIHlvdSB0
+bwogICAgcmVmbGVjdCBiZWZvcmUgeW91IGhhY2shKSAqKQoKVGhlb3JlbSBsZWJfcmVmbCA6IGZv
+cmFsbCBuOm5hdCwKICB0cnVlID0gbGViIG4gbi4KUHJvb2YuCiAgKCogRklMTCBJTiBIRVJFICop
+IEFkbWl0dGVkLgoKVGhlb3JlbSB6ZXJvX25iZXFfUyA6IGZvcmFsbCBuOm5hdCwKICBiZXFfbmF0
+IDAgKFMgbikgPSBmYWxzZS4KUHJvb2YuCiAgKCogRklMTCBJTiBIRVJFICopIEFkbWl0dGVkLgoK
+VGhlb3JlbSBhbmRiX2ZhbHNlX3IgOiBmb3JhbGwgYiA6IGJvb2wsCiAgYW5kYiBiIGZhbHNlID0g
+ZmFsc2UuClByb29mLgogICgqIEZJTEwgSU4gSEVSRSAqKSBBZG1pdHRlZC4KClRoZW9yZW0gcGx1
+c19ibGVfY29tcGF0X2wgOiBmb3JhbGwgbiBtIHAgOiBuYXQsCiAgbGViIG4gbSA9IHRydWUgLT4g
+bGViIChwICsgbikgKHAgKyBtKSA9IHRydWUuClByb29mLgogICgqIEZJTEwgSU4gSEVSRSAqKSBB
+ZG1pdHRlZC4KClRoZW9yZW0gU19uYmVxXzAgOiBmb3JhbGwgbjpuYXQsCiAgYmVxX25hdCAoUyBu
+KSAwID0gZmFsc2UuClByb29mLgogICgqIEZJTEwgSU4gSEVSRSAqKSBBZG1pdHRlZC4KClRoZW9y
+ZW0gbXVsdF8xX2wgOiBmb3JhbGwgbjpuYXQsIDEgKiBuID0gbi4KUHJvb2YuCiAgKCogRklMTCBJ
+TiBIRVJFICopIEFkbWl0dGVkLgoKVGhlb3JlbSBhbGwzX3NwZWMgOiBmb3JhbGwgYiBjIDogYm9v
+bCwKICAgIG9yYgogICAgICAoYW5kYiBiIGMpCiAgICAgIChvcmIgKG5lZ2IgYikKICAgICAgICAg
+ICAgICAgKG5lZ2IgYykpCiAgPSB0cnVlLgpQcm9vZi4KICAoKiBGSUxMIElOIEhFUkUgKikgQWRt
+aXR0ZWQuCgpUaGVvcmVtIG11bHRfcGx1c19kaXN0cl9yIDogZm9yYWxsIG4gbSBwIDogbmF0LAog
+IChuICsgbSkgKiBwID0gKG4gKiBwKSArIChtICogcCkuClByb29mLgogICgqIEZJTEwgSU4gSEVS
+RSAqKSBBZG1pdHRlZC4KClRoZW9yZW0gbXVsdF9hc3NvYyA6IGZvcmFsbCBuIG0gcCA6IG5hdCwK
+ICBuICogKG0gKiBwKSA9IChuICogbSkgKiBwLgpQcm9vZi4KICAoKiBGSUxMIElOIEhFUkUgKikg
+QWRtaXR0ZWQuCigqKiBbXSAqKQoKKCoqICoqKiogRXhlcmNpc2U6IDIgc3RhcnMsIG9wdGlvbmFs
+IChiZXFfbmF0X3JlZmwpICAqKQooKiogUHJvdmUgdGhlIGZvbGxvd2luZyB0aGVvcmVtLiAgKFB1
+dHRpbmcgdGhlIFt0cnVlXSBvbiB0aGUgbGVmdC1oYW5kCiAgICBzaWRlIG9mIHRoZSBlcXVhbGl0
+eSBtYXkgbG9vayBvZGQsIGJ1dCB0aGlzIGlzIGhvdyB0aGUgdGhlb3JlbSBpcwogICAgc3RhdGVk
+IGluIHRoZSBDb3Egc3RhbmRhcmQgbGlicmFyeSwgc28gd2UgZm9sbG93IHN1aXQuICBSZXdyaXRp
+bmcKICAgIHdvcmtzIGVxdWFsbHkgd2VsbCBpbiBlaXRoZXIgZGlyZWN0aW9uLCBzbyB3ZSB3aWxs
+IGhhdmUgbm8gcHJvYmxlbQogICAgdXNpbmcgdGhlIHRoZW9yZW0gbm8gbWF0dGVyIHdoaWNoIHdh
+eSB3ZSBzdGF0ZSBpdC4pICopCgpUaGVvcmVtIGJlcV9uYXRfcmVmbCA6IGZvcmFsbCBuIDogbmF0
+LAogIHRydWUgPSBiZXFfbmF0IG4gbi4KUHJvb2YuCiAgKCogRklMTCBJTiBIRVJFICopIEFkbWl0
+dGVkLgooKiogW10gKikKCigqKiAqKioqIEV4ZXJjaXNlOiAyIHN0YXJzLCBvcHRpb25hbCAocGx1
+c19zd2FwJykgICopCigqKiBUaGUgW3JlcGxhY2VdIHRhY3RpYyBhbGxvd3MgeW91IHRvIHNwZWNp
+ZnkgYSBwYXJ0aWN1bGFyIHN1YnRlcm0gdG8KICAgcmV3cml0ZSBhbmQgd2hhdCB5b3Ugd2FudCBp
+dCByZXdyaXR0ZW4gdG86IFtyZXBsYWNlICh0KSB3aXRoICh1KV0KICAgcmVwbGFjZXMgKGFsbCBj
+b3BpZXMgb2YpIGV4cHJlc3Npb24gW3RdIGluIHRoZSBnb2FsIGJ5IGV4cHJlc3Npb24KICAgW3Vd
+LCBhbmQgZ2VuZXJhdGVzIFt0ID0gdV0gYXMgYW4gYWRkaXRpb25hbCBzdWJnb2FsLiBUaGlzIGlz
+IG9mdGVuCiAgIHVzZWZ1bCB3aGVuIGEgcGxhaW4gW3Jld3JpdGVdIGFjdHMgb24gdGhlIHdyb25n
+IHBhcnQgb2YgdGhlIGdvYWwuCgogICBVc2UgdGhlIFtyZXBsYWNlXSB0YWN0aWMgdG8gZG8gYSBw
+cm9vZiBvZiBbcGx1c19zd2FwJ10sIGp1c3QgbGlrZQogICBbcGx1c19zd2FwXSBidXQgd2l0aG91
+dCBuZWVkaW5nIFthc3NlcnQgKG4gKyBtID0gbSArIG4pXS4gKikKClRoZW9yZW0gcGx1c19zd2Fw
+JyA6IGZvcmFsbCBuIG0gcCA6IG5hdCwKICBuICsgKG0gKyBwKSA9IG0gKyAobiArIHApLgpQcm9v
+Zi4KICAoKiBGSUxMIElOIEhFUkUgKikgQWRtaXR0ZWQuCigqKiBbXSAqKQoKKCoqICoqKiogRXhl
+cmNpc2U6IDMgc3RhcnMsIHJlY29tbWVuZGVkIChiaW5hcnlfY29tbXV0ZSkgICopCigqKiBSZWNh
+bGwgdGhlIFtpbmNyXSBhbmQgW2Jpbl90b19uYXRdIGZ1bmN0aW9ucyB0aGF0IHlvdQogICAgd3Jv
+dGUgZm9yIHRoZSBbYmluYXJ5XSBleGVyY2lzZSBpbiB0aGUgW0Jhc2ljc10gY2hhcHRlci4gIFBy
+b3ZlCiAgICB0aGF0IHRoZSBmb2xsb3dpbmcgZGlhZ3JhbSBjb21tdXRlczoKCiAgICAgICAgICAg
+ICAgIGJpbiAtLS0tLS0tLS0gaW5jciAtLS0tLS0tPiBiaW4KICAgICAgICAgICAgICAgIHwgICAg
+ICAgICAgICAgICAgICAgICAgICAgICB8CiAgICAgICAgICAgIGJpbl90b19uYXQgICAgICAgICAg
+ICAgICAgICBiaW5fdG9fbmF0CiAgICAgICAgICAgICAgICB8ICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgfAogICAgICAgICAgICAgICAgdiAgICAgICAgICAgICAgICAgICAgICAgICAgIHYKICAg
+ICAgICAgICAgICAgbmF0IC0tLS0tLS0tLS0gUyAtLS0tLS0tLS0+IG5hdAoKICAgIFRoYXQgaXMs
+IGluY3JlbWVudGluZyBhIGJpbmFyeSBudW1iZXIgYW5kIHRoZW4gY29udmVydGluZyBpdCB0byAK
+ICAgIGEgKHVuYXJ5KSBuYXR1cmFsIG51bWJlciB5aWVsZHMgdGhlIHNhbWUgcmVzdWx0IGFzIGZp
+cnN0IGNvbnZlcnRpbmcKICAgIGl0IHRvIGEgbmF0dXJhbCBudW1iZXIgYW5kIHRoZW4gaW5jcmVt
+ZW50aW5nLiAgCiAgICBOYW1lIHlvdXIgdGhlb3JlbSBbYmluX3RvX25hdF9wcmVzX2luY3JdICgi
+cHJlcyIgZm9yICJwcmVzZXJ2ZXMiKS4KCiAgICBCZWZvcmUgeW91IHN0YXJ0IHdvcmtpbmcgb24g
+dGhpcyBleGVyY2lzZSwgcGxlYXNlIGNvcHkgdGhlCiAgICBkZWZpbml0aW9ucyBmcm9tIHlvdXIg
+c29sdXRpb24gdG8gdGhlIFtiaW5hcnldIGV4ZXJjaXNlIGhlcmUgc28KICAgIHRoYXQgdGhpcyBm
+aWxlIGNhbiBiZSBncmFkZWQgb24gaXRzIG93bi4gIElmIHlvdSBmaW5kIHlvdXJzZWxmCiAgICB3
+YW50aW5nIHRvIGNoYW5nZSB5b3VyIG9yaWdpbmFsIGRlZmluaXRpb25zIHRvIG1ha2UgdGhlIHBy
+b3BlcnR5CiAgICBlYXNpZXIgdG8gcHJvdmUsIGZlZWwgZnJlZSB0byBkbyBzbyEgKikKCigqIEZJ
+TEwgSU4gSEVSRSAqKQooKiogW10gKikKCigqKiAqKioqIEV4ZXJjaXNlOiA1IHN0YXJzLCBhZHZh
+bmNlZCAoYmluYXJ5X2ludmVyc2UpICAqKQooKiogVGhpcyBleGVyY2lzZSBpcyBhIGNvbnRpbnVh
+dGlvbiBvZiB0aGUgcHJldmlvdXMgZXhlcmNpc2UgYWJvdXQKICAgIGJpbmFyeSBudW1iZXJzLiAg
+WW91IHdpbGwgbmVlZCB5b3VyIGRlZmluaXRpb25zIGFuZCB0aGVvcmVtcyBmcm9tCiAgICB0aGVy
+ZSB0byBjb21wbGV0ZSB0aGlzIG9uZS4KCiAgICAoYSkgRmlyc3QsIHdyaXRlIGEgZnVuY3Rpb24g
+dG8gY29udmVydCBuYXR1cmFsIG51bWJlcnMgdG8gYmluYXJ5CiAgICAgICAgbnVtYmVycy4gIFRo
+ZW4gcHJvdmUgdGhhdCBzdGFydGluZyB3aXRoIGFueSBuYXR1cmFsIG51bWJlciwKICAgICAgICBj
+b252ZXJ0aW5nIHRvIGJpbmFyeSwgdGhlbiBjb252ZXJ0aW5nIGJhY2sgeWllbGRzIHRoZSBzYW1l
+CiAgICAgICAgbmF0dXJhbCBudW1iZXIgeW91IHN0YXJ0ZWQgd2l0aC4KCiAgICAoYikgWW91IG1p
+Z2h0IG5hdHVyYWxseSB0aGluayB0aGF0IHdlIHNob3VsZCBhbHNvIHByb3ZlIHRoZQogICAgICAg
+IG9wcG9zaXRlIGRpcmVjdGlvbjogdGhhdCBzdGFydGluZyB3aXRoIGEgYmluYXJ5IG51bWJlciwK
+ICAgICAgICBjb252ZXJ0aW5nIHRvIGEgbmF0dXJhbCwgYW5kIHRoZW4gYmFjayB0byBiaW5hcnkg
+eWllbGRzIHRoZQogICAgICAgIHNhbWUgbnVtYmVyIHdlIHN0YXJ0ZWQgd2l0aC4gIEhvd2V2ZXIs
+IHRoaXMgaXMgbm90IHRydWUhCiAgICAgICAgRXhwbGFpbiB3aGF0IHRoZSBwcm9ibGVtIGlzLgoK
+ICAgIChjKSBEZWZpbmUgYSAiZGlyZWN0IiBub3JtYWxpemF0aW9uIGZ1bmN0aW9uIC0tIGkuZS4s
+IGEgZnVuY3Rpb24KICAgICAgICBbbm9ybWFsaXplXSBmcm9tIGJpbmFyeSBudW1iZXJzIHRvIGJp
+bmFyeSBudW1iZXJzIHN1Y2ggdGhhdCwKICAgICAgICBmb3IgYW55IGJpbmFyeSBudW1iZXIgYiwg
+Y29udmVydGluZyB0byBhIG5hdHVyYWwgYW5kIHRoZW4gYmFjawogICAgICAgIHRvIGJpbmFyeSB5
+aWVsZHMgWyhub3JtYWxpemUgYildLiAgUHJvdmUgaXQuICAoV2FybmluZzogVGhpcwogICAgICAg
+IHBhcnQgaXMgdHJpY2t5ISkKCiAgICBBZ2FpbiwgZmVlbCBmcmVlIHRvIGNoYW5nZSB5b3VyIGVh
+cmxpZXIgZGVmaW5pdGlvbnMgaWYgdGhpcyBoZWxwcwogICAgaGVyZS4gKikKCigqIEZJTEwgSU4g
+SEVSRSAqKQooKiogW10gKikKCigqICMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjICopCigqKiAqIEZvcm1hbCB2cy4gSW5mb3Jt
+YWwgUHJvb2YgKE9wdGlvbmFsKSAqKQoKKCoqICJfSW5mb3JtYWwgcHJvb2ZzIGFyZSBhbGdvcml0
+aG1zOyBmb3JtYWwgcHJvb2ZzIGFyZSBjb2RlXy4iICopCgooKiogVGhlIHF1ZXN0aW9uIG9mIHdo
+YXQgY29uc3RpdHV0ZXMgYSBwcm9vZiBvZiBhIG1hdGhlbWF0aWNhbAogICAgY2xhaW0gaGFzIGNo
+YWxsZW5nZWQgcGhpbG9zb3BoZXJzIGZvciBtaWxsZW5uaWEsIGJ1dCBhIHJvdWdoIGFuZAogICAg
+cmVhZHkgZGVmaW5pdGlvbiBjb3VsZCBiZSB0aGlzOiBBIHByb29mIG9mIGEgbWF0aGVtYXRpY2Fs
+CiAgICBwcm9wb3NpdGlvbiBbUF0gaXMgYSB3cml0dGVuIChvciBzcG9rZW4pIHRleHQgdGhhdCBp
+bnN0aWxscyBpbiB0aGUKICAgIHJlYWRlciBvciBoZWFyZXIgdGhlIGNlcnRhaW50eSB0aGF0IFtQ
+XSBpcyB0cnVlLiAgVGhhdCBpcywgYSBwcm9vZgogICAgaXMgYW4gYWN0IG9mIGNvbW11bmljYXRp
+b24uCgogICAgQWN0cyBvZiBjb21tdW5pY2F0aW9uIG1heSBpbnZvbHZlIGRpZmZlcmVudCBzb3J0
+cyBvZiByZWFkZXJzLiAgT24KICAgIG9uZSBoYW5kLCB0aGUgInJlYWRlciIgY2FuIGJlIGEgcHJv
+Z3JhbSBsaWtlIENvcSwgaW4gd2hpY2ggY2FzZQogICAgdGhlICJiZWxpZWYiIHRoYXQgaXMgaW5z
+dGlsbGVkIGlzIHRoYXQgW1BdIGNhbiBiZSBtZWNoYW5pY2FsbHkKICAgIGRlcml2ZWQgZnJvbSBh
+IGNlcnRhaW4gc2V0IG9mIGZvcm1hbCBsb2dpY2FsIHJ1bGVzLCBhbmQgdGhlIHByb29mCiAgICBp
+cyBhIHJlY2lwZSB0aGF0IGd1aWRlcyB0aGUgcHJvZ3JhbSBpbiBjaGVja2luZyB0aGlzIGZhY3Qu
+ICBTdWNoCiAgICByZWNpcGVzIGFyZSBfZm9ybWFsXyBwcm9vZnMuCgogICAgQWx0ZXJuYXRpdmVs
+eSwgdGhlIHJlYWRlciBjYW4gYmUgYSBodW1hbiBiZWluZywgaW4gd2hpY2ggY2FzZSB0aGUKICAg
+IHByb29mIHdpbGwgYmUgd3JpdHRlbiBpbiBFbmdsaXNoIG9yIHNvbWUgb3RoZXIgbmF0dXJhbCBs
+YW5ndWFnZSwKICAgIGFuZCB3aWxsIHRodXMgbmVjZXNzYXJpbHkgYmUgX2luZm9ybWFsXy4gIEhl
+cmUsIHRoZSBjcml0ZXJpYSBmb3IKICAgIHN1Y2Nlc3MgYXJlIGxlc3MgY2xlYXJseSBzcGVjaWZp
+ZWQuICBBICJ2YWxpZCIgcHJvb2YgaXMgb25lIHRoYXQKICAgIG1ha2VzIHRoZSByZWFkZXIgYmVs
+aWV2ZSBbUF0uICBCdXQgdGhlIHNhbWUgcHJvb2YgbWF5IGJlIHJlYWQgYnkKICAgIG1hbnkgZGlm
+ZmVyZW50IHJlYWRlcnMsIHNvbWUgb2Ygd2hvbSBtYXkgYmUgY29udmluY2VkIGJ5IGEKICAgIHBh
+cnRpY3VsYXIgd2F5IG9mIHBocmFzaW5nIHRoZSBhcmd1bWVudCwgd2hpbGUgb3RoZXJzIG1heSBu
+b3QgYmUuCiAgICBTb21lIHJlYWRlcnMgbWF5IGJlIHBhcnRpY3VsYXJseSBwZWRhbnRpYywgaW5l
+eHBlcmllbmNlZCwgb3IganVzdAogICAgcGxhaW4gdGhpY2staGVhZGVkOyB0aGUgb25seSB3YXkg
+dG8gY29udmluY2UgdGhlbSB3aWxsIGJlIHRvIG1ha2UKICAgIHRoZSBhcmd1bWVudCBpbiBwYWlu
+c3Rha2luZyBkZXRhaWwuICBCdXQgb3RoZXIgcmVhZGVycywgbW9yZQogICAgZmFtaWxpYXIgaW4g
+dGhlIGFyZWEsIG1heSBmaW5kIGFsbCB0aGlzIGRldGFpbCBzbyBvdmVyd2hlbG1pbmcKICAgIHRo
+YXQgdGhleSBsb3NlIHRoZSBvdmVyYWxsIHRocmVhZDsgYWxsIHRoZXkgd2FudCBpcyB0byBiZSB0
+b2xkIHRoZQogICAgbWFpbiBpZGVhcywgc2luY2UgaXQgaXMgZWFzaWVyIGZvciB0aGVtIHRvIGZp
+bGwgaW4gdGhlIGRldGFpbHMgZm9yCiAgICB0aGVtc2VsdmVzIHRoYW4gdG8gd2FkZSB0aHJvdWdo
+IGEgd3JpdHRlbiBwcmVzZW50YXRpb24gb2YgdGhlbS4KICAgIFVsdGltYXRlbHksIHRoZXJlIGlz
+IG5vIHVuaXZlcnNhbCBzdGFuZGFyZCwgYmVjYXVzZSB0aGVyZSBpcyBubwogICAgc2luZ2xlIHdh
+eSBvZiB3cml0aW5nIGFuIGluZm9ybWFsIHByb29mIHRoYXQgaXMgZ3VhcmFudGVlZCB0bwogICAg
+Y29udmluY2UgZXZlcnkgY29uY2VpdmFibGUgcmVhZGVyLgoKICAgIEluIHByYWN0aWNlLCBob3dl
+dmVyLCBtYXRoZW1hdGljaWFucyBoYXZlIGRldmVsb3BlZCBhIHJpY2ggc2V0IG9mCiAgICBjb252
+ZW50aW9ucyBhbmQgaWRpb21zIGZvciB3cml0aW5nIGFib3V0IGNvbXBsZXggbWF0aGVtYXRpY2Fs
+CiAgICBvYmplY3RzIHRoYXQgLS0gYXQgbGVhc3Qgd2l0aGluIGEgY2VydGFpbiBjb21tdW5pdHkg
+LS0gbWFrZQogICAgY29tbXVuaWNhdGlvbiBmYWlybHkgcmVsaWFibGUuICBUaGUgY29udmVudGlv
+bnMgb2YgdGhpcyBzdHlsaXplZAogICAgZm9ybSBvZiBjb21tdW5pY2F0aW9uIGdpdmUgYSBmYWly
+bHkgY2xlYXIgc3RhbmRhcmQgZm9yIGp1ZGdpbmcKICAgIHByb29mcyBnb29kIG9yIGJhZC4KCiAg
+ICBCZWNhdXNlIHdlIGFyZSB1c2luZyBDb3EgaW4gdGhpcyBjb3Vyc2UsIHdlIHdpbGwgYmUgd29y
+a2luZwogICAgaGVhdmlseSB3aXRoIGZvcm1hbCBwcm9vZnMuICBCdXQgdGhpcyBkb2Vzbid0IG1l
+YW4gd2UgY2FuCiAgICBjb21wbGV0ZWx5IGZvcmdldCBhYm91dCBpbmZvcm1hbCBvbmVzISAgRm9y
+bWFsIHByb29mcyBhcmUgdXNlZnVsCiAgICBpbiBtYW55IHdheXMsIGJ1dCB0aGV5IGFyZSBfbm90
+XyB2ZXJ5IGVmZmljaWVudCB3YXlzIG9mCiAgICBjb21tdW5pY2F0aW5nIGlkZWFzIGJldHdlZW4g
+aHVtYW4gYmVpbmdzLiAqKQoKKCoqIEZvciBleGFtcGxlLCBoZXJlIGlzIGEgcHJvb2YgdGhhdCBh
+ZGRpdGlvbiBpcyBhc3NvY2lhdGl2ZTogKikKClRoZW9yZW0gcGx1c19hc3NvYycgOiBmb3JhbGwg
+biBtIHAgOiBuYXQsCiAgbiArIChtICsgcCkgPSAobiArIG0pICsgcC4KUHJvb2YuIGludHJvcyBu
+IG0gcC4gaW5kdWN0aW9uIG4gYXMgW3wgbicgSUhuJ10uIHJlZmxleGl2aXR5LgogIHNpbXBsLiBy
+ZXdyaXRlIC0+IElIbicuIHJlZmxleGl2aXR5LiAgUWVkLgoKKCoqIENvcSBpcyBwZXJmZWN0bHkg
+aGFwcHkgd2l0aCB0aGlzLiAgRm9yIGEgaHVtYW4sIGhvd2V2ZXIsIGl0CiAgICBpcyBkaWZmaWN1
+bHQgdG8gbWFrZSBtdWNoIHNlbnNlIG9mIGl0LiAgV2UgY2FuIHVzZSBjb21tZW50cyBhbmQKICAg
+IGJ1bGxldHMgdG8gc2hvdyB0aGUgc3RydWN0dXJlIGEgbGl0dGxlIG1vcmUgY2xlYXJseS4uLiAq
+KQoKVGhlb3JlbSBwbHVzX2Fzc29jJycgOiBmb3JhbGwgbiBtIHAgOiBuYXQsCiAgbiArIChtICsg
+cCkgPSAobiArIG0pICsgcC4KUHJvb2YuCiAgaW50cm9zIG4gbSBwLiBpbmR1Y3Rpb24gbiBhcyBb
+fCBuJyBJSG4nXS4KICAtICgqIG4gPSAwICopCiAgICByZWZsZXhpdml0eS4KICAtICgqIG4gPSBT
+IG4nICopCiAgICBzaW1wbC4gcmV3cml0ZSAtPiBJSG4nLiByZWZsZXhpdml0eS4gICBRZWQuCgoo
+KiogLi4uIGFuZCBpZiB5b3UncmUgdXNlZCB0byBDb3EgeW91IG1heSBiZSBhYmxlIHRvIHN0ZXAK
+ICAgIHRocm91Z2ggdGhlIHRhY3RpY3Mgb25lIGFmdGVyIHRoZSBvdGhlciBpbiB5b3VyIG1pbmQg
+YW5kIGltYWdpbmUKICAgIHRoZSBzdGF0ZSBvZiB0aGUgY29udGV4dCBhbmQgZ29hbCBzdGFjayBh
+dCBlYWNoIHBvaW50LCBidXQgaWYgdGhlCiAgICBwcm9vZiB3ZXJlIGV2ZW4gYSBsaXR0bGUgYml0
+IG1vcmUgY29tcGxpY2F0ZWQgdGhpcyB3b3VsZCBiZSBuZXh0CiAgICB0byBpbXBvc3NpYmxlLgoK
+ICAgIEEgKHBlZGFudGljKSBtYXRoZW1hdGljaWFuIG1pZ2h0IHdyaXRlIHRoZSBwcm9vZiBzb21l
+dGhpbmcgbGlrZQogICAgdGhpczogKikKCigqKiAtIF9UaGVvcmVtXzogRm9yIGFueSBbbl0sIFtt
+XSBhbmQgW3BdLAoKICAgICAgbiArIChtICsgcCkgPSAobiArIG0pICsgcC4KCiAgICBfUHJvb2Zf
+OiBCeSBpbmR1Y3Rpb24gb24gW25dLgoKICAgIC0gRmlyc3QsIHN1cHBvc2UgW24gPSAwXS4gIFdl
+IG11c3Qgc2hvdwoKICAgICAgICAwICsgKG0gKyBwKSA9ICgwICsgbSkgKyBwLgoKICAgICAgVGhp
+cyBmb2xsb3dzIGRpcmVjdGx5IGZyb20gdGhlIGRlZmluaXRpb24gb2YgWytdLgoKICAgIC0gTmV4
+dCwgc3VwcG9zZSBbbiA9IFMgbiddLCB3aGVyZQoKICAgICAgICBuJyArIChtICsgcCkgPSAobicg
+KyBtKSArIHAuCgogICAgICBXZSBtdXN0IHNob3cKCiAgICAgICAgKFMgbicpICsgKG0gKyBwKSA9
+ICgoUyBuJykgKyBtKSArIHAuCgogICAgICBCeSB0aGUgZGVmaW5pdGlvbiBvZiBbK10sIHRoaXMg
+Zm9sbG93cyBmcm9tCgogICAgICAgIFMgKG4nICsgKG0gKyBwKSkgPSBTICgobicgKyBtKSArIHAp
+LAoKICAgICAgd2hpY2ggaXMgaW1tZWRpYXRlIGZyb20gdGhlIGluZHVjdGlvbiBoeXBvdGhlc2lz
+LiAgX1FlZF8uICopCgoKKCoqIFRoZSBvdmVyYWxsIGZvcm0gb2YgdGhlIHByb29mIGlzIGJhc2lj
+YWxseSBzaW1pbGFyLCBhbmQgb2YKICAgIGNvdXJzZSB0aGlzIGlzIG5vIGFjY2lkZW50OiBDb3Eg
+aGFzIGJlZW4gZGVzaWduZWQgc28gdGhhdCBpdHMKICAgIFtpbmR1Y3Rpb25dIHRhY3RpYyBnZW5l
+cmF0ZXMgdGhlIHNhbWUgc3ViLWdvYWxzLCBpbiB0aGUgc2FtZQogICAgb3JkZXIsIGFzIHRoZSBi
+dWxsZXQgcG9pbnRzIHRoYXQgYSBtYXRoZW1hdGljaWFuIHdvdWxkIHdyaXRlLiAgQnV0CiAgICB0
+aGVyZSBhcmUgc2lnbmlmaWNhbnQgZGlmZmVyZW5jZXMgb2YgZGV0YWlsOiB0aGUgZm9ybWFsIHBy
+b29mIGlzCiAgICBtdWNoIG1vcmUgZXhwbGljaXQgaW4gc29tZSB3YXlzIChlLmcuLCB0aGUgdXNl
+IG9mIFtyZWZsZXhpdml0eV0pCiAgICBidXQgbXVjaCBsZXNzIGV4cGxpY2l0IGluIG90aGVycyAo
+aW4gcGFydGljdWxhciwgdGhlICJwcm9vZiBzdGF0ZSIKICAgIGF0IGFueSBnaXZlbiBwb2ludCBp
+biB0aGUgQ29xIHByb29mIGlzIGNvbXBsZXRlbHkgaW1wbGljaXQsCiAgICB3aGVyZWFzIHRoZSBp
+bmZvcm1hbCBwcm9vZiByZW1pbmRzIHRoZSByZWFkZXIgc2V2ZXJhbCB0aW1lcyB3aGVyZQogICAg
+dGhpbmdzIHN0YW5kKS4gKikKCigqKiAqKioqIEV4ZXJjaXNlOiAyIHN0YXJzLCBhZHZhbmNlZCwg
+cmVjb21tZW5kZWQgKHBsdXNfY29tbV9pbmZvcm1hbCkgICopCigqKiBUcmFuc2xhdGUgeW91ciBz
+b2x1dGlvbiBmb3IgW3BsdXNfY29tbV0gaW50byBhbiBpbmZvcm1hbCBwcm9vZjoKCiAgICBUaGVv
+cmVtOiBBZGRpdGlvbiBpcyBjb21tdXRhdGl2ZS4KCiAgICBQcm9vZjogKCogRklMTCBJTiBIRVJF
+ICopCiopCigqKiBbXSAqKQoKKCoqICoqKiogRXhlcmNpc2U6IDIgc3RhcnMsIG9wdGlvbmFsIChi
+ZXFfbmF0X3JlZmxfaW5mb3JtYWwpICAqKQooKiogV3JpdGUgYW4gaW5mb3JtYWwgcHJvb2Ygb2Yg
+dGhlIGZvbGxvd2luZyB0aGVvcmVtLCB1c2luZyB0aGUKICAgIGluZm9ybWFsIHByb29mIG9mIFtw
+bHVzX2Fzc29jXSBhcyBhIG1vZGVsLiAgRG9uJ3QganVzdAogICAgcGFyYXBocmFzZSB0aGUgQ29x
+IHRhY3RpY3MgaW50byBFbmdsaXNoIQoKICAgIFRoZW9yZW06IFt0cnVlID0gYmVxX25hdCBuIG5d
+IGZvciBhbnkgW25dLgoKICAgIFByb29mOiAoKiBGSUxMIElOIEhFUkUgKikKW10gKikKCigqKiAk
+RGF0ZTogMjAxNi0wNS0yNiAxNjoxNzoxOSAtMDQwMCAoVGh1LCAyNiBNYXkgMjAxNikgJCAqKQoK
+(*UHIDE*)
